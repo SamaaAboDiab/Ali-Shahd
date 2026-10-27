@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>زفاف شهد وعلي</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="دعوة لحضور حفل زفاف شهد وعلي">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Aref+Ruqaa+Ink:wght@400;700&family=Amiri:ital,wght@0,400;0,700&display=swap">
+<style>
+/* Layout: one centered invitation column on white lace with a faint gold honeycomb; envelope overlay opens into a hexagon-framed name plate, then date, program, place and reply.
+   Palette from the couple's photo: white lace dress, gold jewelry, burnt-orange shirt, ivory embroidered curtain. */
+:root {
+  --lace: #FCFAF6;       /* white lace, page ground */
+  --ivory: #F4EDE2;      /* ivory curtain, raised surfaces */
+  --gold: #B08435;       /* jewelry gold: lines, frames */
+  --gold-deep: #8C6524;  /* gold for text */
+  --rust: #B5532B;       /* the shirt: seal, buttons */
+  --rust-deep: #923F1D;
+  --ink: #3B2A20;        /* body text */
+  --muted: #7A6656;      /* secondary text */
+  --line: rgba(176, 132, 53, .32);
+  --on-rust: #FFF8EF;
+
+  --f-display: "Aref Ruqaa Ink", "Aref Ruqaa", "Amiri", serif;
+  --f-seal: "Aref Ruqaa", "Amiri", serif;
+  --f-body: "Amiri", "Noto Naskh Arabic", "Segoe UI", Tahoma, serif;
+
+  --s-1: .95rem; --s0: 1.15rem; --s1: 1.375rem; --s2: 1.875rem; --s3: 2.75rem;
+  color-scheme: light;
+}
+
+/* recolor the ink calligraphy font to one solid color (its built-in palette is red and blue with a faded ink layer) */
+@font-palette-values --gold {
+  font-family: "Aref Ruqaa Ink";
+  override-colors: 0 #9A7029, 1 #9A7029, 2 #9A7029, 3 #9A7029, 4 #9A7029;
+}
+@font-palette-values --rust {
+  font-family: "Aref Ruqaa Ink";
+  override-colors: 0 #A9492A, 1 #A9492A, 2 #A9492A, 3 #A9492A, 4 #A9492A;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--lace);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: var(--s0);
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+html.locked, html.locked body { overflow: hidden; }
+
+/* honeycomb texture, fading out from the top */
+body::after {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23B08435' stroke-opacity='.16' stroke-width='1'/%3E%3C/svg%3E");
+  -webkit-mask-image: radial-gradient(120% 70% at 50% 0%, #000 0%, transparent 75%);
+          mask-image: radial-gradient(120% 70% at 50% 0%, #000 0%, transparent 75%);
+  z-index: 0;
+}
+
+main { position: relative; z-index: 1; }
+
+.wrap {
+  width: 100%;
+  max-width: 44rem;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+:focus-visible { outline: 2px solid var(--rust); outline-offset: 3px; border-radius: 4px; }
+
+/* ---------- Envelope overlay ---------- */
+.intro {
+  position: fixed; inset: 0; z-index: 50;
+  display: grid; place-items: center;
+  background:
+    radial-gradient(60% 50% at 50% 45%, rgba(176,132,53,.14), transparent 70%),
+    var(--lace);
+  padding: 24px max(16px, env(safe-area-inset-right, 0px)) 24px max(16px, env(safe-area-inset-left, 0px));
+  transition: opacity .8s ease, visibility .8s;
+}
+.intro.is-gone { opacity: 0; visibility: hidden; }
+
+.intro-inner { display: grid; justify-items: center; gap: 28px; text-align: center; }
+.intro-to { font-size: var(--s2); font-family: var(--f-display); font-palette: --gold; color: var(--gold-deep); margin: 0; min-height: 1.6em; }
+.intro-hint { color: var(--muted); font-size: var(--s-1); margin: 0; }
+
+.envelope {
+  position: relative;
+  width: min(84vw, 420px);
+  aspect-ratio: 3 / 2;
+  perspective: 1400px;
+  transition: transform 1s cubic-bezier(.6,0,.3,1) 1.5s, opacity .8s ease 1.6s;
+}
+.env-back {
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, #EFE5D5, #E3D5BF);
+  border-radius: 6px;
+  box-shadow: 0 30px 60px -24px rgba(110, 72, 30, .45), 0 0 0 1px rgba(176,132,53,.25);
+}
+.env-letter {
+  position: absolute; inset: 8% 6% 10%;
+  background: #FFFDF9;
+  border-radius: 4px;
+  display: grid; place-items: center;
+  font-family: var(--f-display);
+  font-palette: --gold;
+  color: var(--gold-deep);
+  font-size: clamp(1.4rem, 6vw, 2rem);
+  transition: transform .9s cubic-bezier(.3,.7,.2,1) .8s;
+  z-index: 1;
+}
+.env-letter::before {
+  content: ""; position: absolute; inset: 8px;
+  border: 1px solid var(--line); border-radius: 2px;
+}
+.env-pocket {
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(200deg, #F9F4EC, #EBE0CE);
+  clip-path: polygon(0 0, 50% 52%, 100% 0, 100% 100%, 0 100%);
+  border-radius: 6px;
+}
+.env-flap {
+  position: absolute; inset: 0 0 auto; height: 62%;
+  z-index: 3;
+  background: linear-gradient(180deg, #F4ECDF, #E5D7C1);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transition: transform .7s cubic-bezier(.5,0,.3,1) .25s, z-index 0s .6s;
+}
+.seal {
+  position: absolute; z-index: 4;
+  inset-inline-start: 50%; top: 62%;
+  transform: translate(50%, -50%);
+  width: 92px; height: 92px;
+  border: 0; border-radius: 50%;
+  cursor: pointer;
+  background: radial-gradient(circle at 38% 32%, #D2794A 0%, var(--rust) 55%, #7A3216 100%);
+  box-shadow:
+    0 0 0 5px rgba(181,83,43,.5),
+    0 0 0 9px rgba(181,83,43,.16),
+    inset 0 -4px 10px rgba(0,0,0,.28),
+    0 10px 20px rgba(110,50,20,.35);
+  color: #F6DDA6;
+  font-family: var(--f-seal);
+  font-size: 1.65rem;
+  line-height: 1;
+  display: grid; place-items: center;
+  transition: transform .35s ease, opacity .35s ease;
+}
+[dir="ltr"] .seal { transform: translate(-50%, -50%); }
+.seal:hover { transform: translate(50%, -50%) scale(1.05); }
+.seal span { text-shadow: 0 1px 0 rgba(0,0,0,.3); }
+
+.intro.is-opening .seal { transform: translate(50%, -50%) scale(.4); opacity: 0; }
+.intro.is-opening .env-flap { transform: rotateX(180deg); z-index: 0; }
+.intro.is-opening .env-letter { transform: translateY(-48%); }
+.intro.is-opening .envelope { transform: translateY(18vh); opacity: 0; }
+
+/* ---------- Hero ---------- */
+.hero { text-align: center; padding-block: clamp(48px, 9vw, 96px) 24px; }
+.verse {
+  margin: 0 auto 28px;
+  max-width: 34rem;
+  color: var(--muted);
+  font-size: var(--s-1);
+  line-height: 2.1;
+  text-wrap: balance;
+}
+.plate {
+  position: relative;
+  width: min(100%, 520px);
+  aspect-ratio: 200 / 230;
+  margin-inline: auto;
+  display: grid; place-items: center;
+}
+.plate svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.plate .hex-outer { fill: none; stroke: var(--gold); stroke-width: .8; }
+.plate .hex-inner { fill: rgba(176,132,53,.05); stroke: var(--line); stroke-width: .5; }
+.names {
+  position: relative;
+  display: grid; justify-items: center;
+  font-family: var(--f-display);
+  font-palette: --gold;
+  color: var(--gold-deep);
+  line-height: 1.05;
+  margin: 0;
+  font-weight: 700;
+}
+.names .n { font-size: clamp(4rem, 19vw, 8.75rem); }
+.names .and {
+  font-size: clamp(1.6rem, 6vw, 2.6rem);
+  font-palette: --rust;
+  color: var(--rust);
+  font-weight: 400;
+  margin-block: .1em;
+}
+.hero-line { margin: 28px auto 0; font-size: var(--s1); color: var(--ink); text-wrap: balance; }
+.hero-date { margin: 6px 0 0; color: var(--rust); font-size: var(--s0); }
+
+/* couple photo, cut out and standing in a gold honeycomb cell */
+.couple {
+  position: relative;
+  width: min(100%, 380px);
+  margin: 44px auto 0;
+  display: grid; justify-items: center; align-items: end;
+}
+.couple::before {
+  content: ""; position: absolute;
+  left: 6%; right: 6%; bottom: 0;
+  aspect-ratio: 1 / 1.1547;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background: linear-gradient(170deg, #F6EEDF, #EADBC0);
+}
+.couple::after {
+  content: ""; position: absolute;
+  left: 6%; right: 6%; bottom: 0;
+  aspect-ratio: 1 / 1.1547;
+  clip-path: polygon(evenodd, 50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%, 0 25%, 1.2% 25.7%, 1.2% 74.3%, 50% 98.6%, 98.8% 74.3%, 98.8% 25.7%, 50% 1.4%, 1.2% 25.7%, 0 25%);
+  background: var(--gold);
+  pointer-events: none;
+}
+.couple img {
+  position: relative; z-index: 1;
+  width: 100%; height: auto; max-width: 100%;
+  /* the cutout ends abruptly at his arm on the left and at the waist, so both edges fade */
+  -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 99%), linear-gradient(to right, transparent, #000 9%);
+  -webkit-mask-composite: source-in;
+          mask-image: linear-gradient(to bottom, #000 78%, transparent 99%), linear-gradient(to right, transparent, #000 9%);
+          mask-composite: intersect;
+}
+
+/* draw-in, only after the envelope opens */
+.js .plate .hex-outer { stroke-dasharray: 700; stroke-dashoffset: 0; }
+.js.ready-anim .plate .hex-outer { animation: draw 2.2s cubic-bezier(.6,0,.2,1) both; }
+.js.ready-anim .names { animation: rise 1.4s ease .5s both; }
+@keyframes draw { from { stroke-dashoffset: 700; } to { stroke-dashoffset: 0; } }
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Sections ---------- */
+.sec { padding-block: clamp(56px, 10vw, 96px); text-align: center; }
+.sec + .sec { border-top: 1px solid var(--line); }
+.sec h2 {
+  font-family: var(--f-display);
+  font-palette: --rust;
+  font-weight: 400;
+  font-size: var(--s3);
+  color: var(--rust);
+  line-height: 1.3;
+  margin: 0 0 12px;
+  text-wrap: balance;
+}
+.sec .lede { color: var(--muted); margin: 0 auto; max-width: 30rem; text-wrap: pretty; }
+
+.invite p { margin: 0 auto; max-width: 30rem; font-size: var(--s1); line-height: 2; text-wrap: balance; }
+.invite .sig { margin-top: 20px; font-family: var(--f-display); font-palette: --gold; color: var(--gold-deep); font-size: var(--s2); }
+
+/* date + honeycomb countdown */
+.big-date { font-size: var(--s2); color: var(--ink); margin: 8px 0 0; line-height: 1.5; }
+.big-time { color: var(--rust); margin: 0; }
+.comb {
+  display: flex; justify-content: center; gap: 8px;
+  margin-top: 40px; padding-bottom: 30px;
+  font-variant-numeric: tabular-nums;
+}
+.cell {
+  position: relative;
+  width: clamp(70px, 20vw, 104px);
+  aspect-ratio: 1 / 1.1547;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background: var(--gold);
+  display: grid; place-content: center;
+  text-align: center;
+}
+.cell::before {
+  content: ""; position: absolute; inset: 1.5px;
+  clip-path: inherit;
+  background: var(--ivory);
+}
+.cell:nth-child(even) { transform: translateY(30px); }
+.cell b, .cell small { position: relative; display: block; }
+.cell b { font-size: clamp(1.4rem, 5.5vw, 2rem); font-weight: 700; color: var(--rust); line-height: 1.2; }
+.cell small { font-size: .85rem; color: var(--muted); line-height: 1.4; }
+.comb-done { margin-top: 32px; font-family: var(--f-display); font-palette: --gold; font-size: var(--s2); color: var(--gold-deep); }
+
+/* program */
+.program {
+  list-style: none; margin: 36px auto 0; padding: 0;
+  max-width: 24rem;
+  display: grid; gap: 28px;
+  text-align: start;
+  position: relative;
+}
+.program::before {
+  content: ""; position: absolute;
+  inset-block: 10px; inset-inline-start: 7px;
+  border-inline-start: 1px dashed var(--gold);
+  opacity: .6;
+}
+.program li { position: relative; padding-inline-start: 40px; }
+.program li::before {
+  content: ""; position: absolute;
+  inset-inline-start: 0; top: .55em;
+  width: 15px; height: 17px;
+  background: var(--gold);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+}
+.program time { display: block; color: var(--rust); font-size: var(--s-1); }
+.program strong { display: block; font-weight: 700; font-size: var(--s1); line-height: 1.5; }
+.program span { color: var(--muted); font-size: var(--s-1); }
+
+/* place */
+.venue-name { font-family: var(--f-display); font-palette: --gold; font-size: var(--s2); color: var(--gold-deep); margin: 12px 0 0; }
+.venue-addr { color: var(--muted); margin: 4px 0 0; }
+.actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 28px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding-inline: 26px;
+  border-radius: 999px;
+  font: 700 var(--s0)/1 var(--f-body);
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid var(--rust);
+  transition: background-color .2s ease, color .2s ease;
+}
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn-solid { background: var(--rust); color: var(--on-rust); }
+.btn-solid:hover { background: var(--rust-deep); }
+.btn-ghost { background: transparent; color: var(--rust); }
+.btn-ghost:hover { background: rgba(181,83,43,.08); }
+
+/* reply */
+.reply-form {
+  margin: 32px auto 0;
+  max-width: 26rem;
+  display: grid; gap: 22px;
+  text-align: start;
+}
+.field { display: grid; gap: 8px; }
+.field > label, .field > legend { font-weight: 700; font-size: var(--s0); color: var(--ink); padding: 0; }
+fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
+.input, .select {
+  width: 100%;
+  min-height: 50px;
+  padding-inline: 16px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #FFFFFF;
+  color: var(--ink);
+  font: 400 var(--s0) var(--f-body);
+}
+.input::placeholder { color: #A8978A; }
+.area { min-height: 110px; padding-block: 12px; resize: vertical; line-height: 1.7; }
+.opt { font-weight: 400; color: var(--muted); font-size: var(--s-1); }
+.btn:disabled { opacity: .6; cursor: progress; }
+#sendError { overflow-wrap: anywhere; }
+.input:focus, .select:focus { border-color: var(--gold); outline: none; box-shadow: 0 0 0 3px rgba(176,132,53,.22); }
+.choices { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.choice { position: relative; }
+.choice input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.choice span {
+  display: grid; place-items: center; text-align: center;
+  min-height: 50px; padding: 8px 10px;
+  border: 1px solid var(--line); border-radius: 10px;
+  background: #FFFFFF;
+  color: var(--muted); line-height: 1.4;
+  transition: all .2s ease;
+}
+.choice input:checked + span { border-color: var(--rust); color: var(--on-rust); background: var(--rust); font-weight: 700; }
+.choice input:focus-visible + span { outline: 2px solid var(--rust); outline-offset: 3px; }
+.error { color: #A3321B; font-size: var(--s-1); margin: 0; }
+.reply-form .btn { width: 100%; }
+.sent {
+  border: 1px solid var(--gold); border-radius: 14px;
+  padding: 20px; text-align: center;
+  background: var(--ivory);
+}
+.sent p { margin: 0 0 14px; }
+
+/* footer */
+.foot { text-align: center; padding-block: 72px 56px; }
+.foot .bye { font-family: var(--f-display); font-palette: --gold; font-size: clamp(2.4rem, 9vw, 3.6rem); color: var(--gold-deep); margin: 0; line-height: 1.3; }
+.foot .who { color: var(--muted); margin: 8px 0 0; }
+
+@media (max-width: 380px) {
+  .comb { gap: 5px; }
+  .choices { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+<noscript><style>.intro { display: none; } html.locked, html.locked body { overflow: auto; }</style></noscript>
+</head>
+<body>
+
+<div class="intro" id="intro" role="dialog" aria-label="ظرف الدعوة">
+  <div class="intro-inner">
+    <p class="intro-to" id="introTo"></p>
+    <div class="envelope" aria-hidden="false">
+      <div class="env-back"></div>
+      <div class="env-letter" aria-hidden="true">شهد و علي</div>
+      <div class="env-pocket"></div>
+      <div class="env-flap"></div>
+      <button class="seal" id="seal" type="button" aria-label="افتح الدعوة"><span aria-hidden="true">ش ع</span></button>
+    </div>
+    <p class="intro-hint">اضغط على الختم لفتح الدعوة</p>
+  </div>
+</div>
+
+<main>
+  <header class="hero wrap">
+    <p class="verse">﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ﴾</p>
+
+    <div class="plate">
+      <svg viewBox="0 0 200 230" aria-hidden="true">
+        <polygon class="hex-inner" points="100,22 180,68 180,162 100,208 20,162 20,68"/>
+        <polygon class="hex-outer" points="100,4 196,59 196,171 100,226 4,171 4,59"/>
+      </svg>
+      <h1 class="names">
+        <span class="n" data-bride>شهد</span>
+        <span class="and">و</span>
+        <span class="n" data-groom>علي</span>
+      </h1>
+    </div>
+
+    <p class="hero-line">ندعوكم لمشاركتنا فرحة العمر</p>
+    <p class="hero-date" data-date-short></p>
+
+    <figure class="couple" id="couple" hidden>
+      <img id="couplePhoto" alt="" width="800" height="1000">
+    </figure>
+  </header>
+
+  <section class="sec invite wrap" aria-labelledby="t-invite">
+    <h2 id="t-invite">دعوة</h2>
+    <p>بقلوبٍ يملؤها الحب والامتنان، تتشرّف عائلتا <span data-bride-family></span> و<span data-groom-family></span> بدعوتكم لحضور حفل زفاف ابنيهما، فحضوركم يكمّل فرحتنا ويزيدها بهجة.</p>
+    <p class="sig">آل <span data-bride-family></span> وآل <span data-groom-family></span></p>
+  </section>
+
+  <section class="sec wrap" aria-labelledby="t-date">
+    <h2 id="t-date">موعدنا</h2>
+    <p class="big-date" data-date-long></p>
+    <p class="big-time" data-time></p>
+    <div class="comb" id="comb" aria-live="off">
+      <div class="cell"><b id="cd-d">٠</b><small>يوم</small></div>
+      <div class="cell"><b id="cd-h">٠</b><small>ساعة</small></div>
+      <div class="cell"><b id="cd-m">٠</b><small>دقيقة</small></div>
+      <div class="cell"><b id="cd-s">٠</b><small>ثانية</small></div>
+    </div>
+    <p class="comb-done" id="combDone" hidden>اليوم الموعود وصل</p>
+  </section>
+
+  <section class="sec wrap" id="programSec" aria-labelledby="t-program">
+    <h2 id="t-program">برنامج الحفل</h2>
+    <p class="lede">مواعيد تقريبية، والفرحة ممتدة طول الليل</p>
+    <ol class="program" id="program"></ol>
+  </section>
+
+  <section class="sec wrap" aria-labelledby="t-place">
+    <h2 id="t-place">المكان</h2>
+    <p class="venue-name" data-venue></p>
+    <p class="venue-addr" data-address></p>
+    <div class="actions">
+      <a class="btn btn-solid" id="mapLink" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+        افتح الخريطة
+      </a>
+      <a class="btn btn-ghost" id="calLink" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+        أضف للتقويم
+      </a>
+    </div>
+  </section>
+
+  <section class="sec wrap" aria-labelledby="t-reply">
+    <h2 id="t-reply">تأكيد الحضور والتهنئة</h2>
+    <p class="lede">يسعدنا أن نعرف إن كنتم ستشاركوننا، ونسعد أكثر بكلمة منكم</p>
+
+    <form class="reply-form" id="replyForm" novalidate>
+      <div class="field">
+        <label for="guestName">الاسم</label>
+        <input class="input" id="guestName" name="guestName" type="text" dir="auto" autocomplete="name" placeholder="مثال: أحمد محمود">
+        <p class="error" id="nameError" hidden>اكتب اسمك ليصل الرد باسمك</p>
+      </div>
+
+      <fieldset class="field">
+        <legend>هل ستحضر؟</legend>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="attend" id="attendYes" value="yes" checked><span>سأحضر بإذن الله</span></label>
+          <label class="choice"><input type="radio" name="attend" id="attendNo" value="no"><span>أعتذر عن الحضور</span></label>
+        </div>
+      </fieldset>
+
+      <div class="field" id="countField">
+        <label for="guestCount">عدد الحضور</label>
+        <select class="select" id="guestCount" name="guestCount">
+          <option value="1">فرد واحد</option>
+          <option value="2">فردان</option>
+          <option value="3">٣ أفراد</option>
+          <option value="4">٤ أفراد</option>
+          <option value="5">٥ أفراد</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="wish">رسالة للعروسين <span class="opt">(اختياري)</span></label>
+        <textarea class="input area" id="wish" name="wish" dir="auto" rows="4" placeholder="اكتب تهنئتك لشهد وعلي"></textarea>
+      </div>
+
+      <button class="btn btn-solid" id="sendBtn" type="submit">أرسل الرد</button>
+      <p class="error" id="sendError" role="alert" hidden></p>
+
+      <div class="sent" id="sent" role="status" hidden>
+        <p id="sentText"></p>
+      </div>
+    </form>
+  </section>
+
+  <footer class="foot wrap">
+    <p class="bye">بانتظاركم</p>
+    <p class="who"><span data-bride>شهد</span> و<span data-groom>علي</span></p>
+  </footer>
+</main>
+
+<script>
+/* =========================================================
+   عدّلي البيانات هنا فقط
+   ========================================================= */
+const WEDDING = {
+  bride: "شهد",
+  groom: "علي",
+  brideFamily: "حجاج",
+  groomFamily: "الجزيري",
+  // ⚠️ تاريخ الفرح لسه مؤقت: غيّري اليوم فقط (السنة-الشهر-اليوم)، الساعة ٧ مساءً بتوقيت مصر
+  date: "2026-12-24T19:00:00+02:00",
+  durationHours: 5,
+  venue: "قاعة ماس",
+  address: "",
+  // رابط اللوكيشن من جوجل ماب؛ لو فاضي زرار الخريطة مش هيظهر
+  mapUrl: "",
+  // الإيميل اللي هتوصل عليه الردود والتهاني
+  email: "sh223524@gmail.com",
+  // صورة العروسين بدون خلفية (موجودة جنب الصفحة)؛ لو فاضي مش هتظهر
+  photo: "couple.webp",
+  // برنامج الحفل؛ لو فاضي القسم مش هيظهر. مثال: { time: "19:00", title: "استقبال الضيوف", note: "" }
+  program: []
+};
+/* ========================================================= */
+
+const root = document.documentElement;
+root.classList.add("js");
+const TZ = "Africa/Cairo";
+const when = new Date(WEDDING.date);
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const fmt = (opts) => new Intl.DateTimeFormat("ar-EG", { timeZone: TZ, ...opts }).format(when);
+const num = new Intl.NumberFormat("ar-EG");
+const setAll = (sel, text) => document.querySelectorAll(sel).forEach((el) => { el.textContent = text; });
+
+setAll("[data-bride]", WEDDING.bride);
+setAll("[data-groom]", WEDDING.groom);
+setAll("[data-date-short]", fmt({ day: "numeric", month: "long", year: "numeric" }));
+setAll("[data-date-long]", fmt({ weekday: "long", day: "numeric", month: "long", year: "numeric" }));
+setAll("[data-time]", "الساعة " + fmt({ hour: "numeric", minute: "2-digit" }));
+setAll("[data-venue]", WEDDING.venue);
+setAll("[data-address]", WEDDING.address);
+setAll("[data-bride-family]", WEDDING.brideFamily);
+setAll("[data-groom-family]", WEDDING.groomFamily);
+document.querySelector("[data-address]").hidden = !WEDDING.address;
+document.getElementById("programSec").hidden = WEDDING.program.length === 0;
+if (WEDDING.photo) {
+  const img = document.getElementById("couplePhoto");
+  img.alt = `${WEDDING.bride} و${WEDDING.groom}`;
+  img.onload = () => { document.getElementById("couple").hidden = false; };
+  img.src = WEDDING.photo;
+}
+document.getElementById("wish").placeholder = `اكتب تهنئتك لـ${WEDDING.bride} و${WEDDING.groom}`;
+document.title = `زفاف ${WEDDING.bride} و${WEDDING.groom}`;
+document.querySelector(".env-letter").textContent = `${WEDDING.bride} و ${WEDDING.groom}`;
+document.querySelector(".seal span").textContent = `${WEDDING.bride[0]} ${WEDDING.groom[0]}`;
+
+// program
+const program = document.getElementById("program");
+WEDDING.program.forEach((p) => {
+  const [h, m] = p.time.split(":").map(Number);
+  const t = new Date(2000, 0, 1, h, m);
+  const li = document.createElement("li");
+  li.innerHTML = `<time></time><strong></strong><span></span>`;
+  li.querySelector("time").textContent = new Intl.DateTimeFormat("ar-EG", { hour: "numeric", minute: "2-digit" }).format(t);
+  li.querySelector("strong").textContent = p.title;
+  li.querySelector("span").textContent = p.note;
+  program.appendChild(li);
+});
+
+// links
+if (WEDDING.mapUrl) document.getElementById("mapLink").href = WEDDING.mapUrl;
+else document.getElementById("mapLink").hidden = true;
+const stamp = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+const end = new Date(when.getTime() + WEDDING.durationHours * 3600e3);
+document.getElementById("calLink").href =
+  "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+  "&text=" + encodeURIComponent(`زفاف ${WEDDING.bride} و${WEDDING.groom}`) +
+  "&dates=" + stamp(when) + "/" + stamp(end) +
+  "&location=" + encodeURIComponent(`${WEDDING.venue}، ${WEDDING.address}`);
+
+// countdown
+const cd = { d: document.getElementById("cd-d"), h: document.getElementById("cd-h"), m: document.getElementById("cd-m"), s: document.getElementById("cd-s") };
+function tick() {
+  let diff = Math.max(0, when - Date.now());
+  if (diff === 0) {
+    document.getElementById("comb").hidden = true;
+    document.getElementById("combDone").hidden = false;
+    return;
+  }
+  const d = Math.floor(diff / 864e5); diff -= d * 864e5;
+  const h = Math.floor(diff / 36e5);  diff -= h * 36e5;
+  const m = Math.floor(diff / 6e4);   diff -= m * 6e4;
+  const s = Math.floor(diff / 1e3);
+  cd.d.textContent = num.format(d);
+  cd.h.textContent = num.format(h);
+  cd.m.textContent = num.format(m);
+  cd.s.textContent = num.format(s);
+  setTimeout(tick, 1000 - (Date.now() % 1000));
+}
+tick();
+
+// personal greeting: index.html?guest=أحمد
+let guest = "";
+try { guest = (new URLSearchParams(location.search).get("guest") || "").trim().slice(0, 40); } catch (e) {}
+document.getElementById("introTo").textContent = guest ? `إلى ${guest}` : "دعوة خاصة لك";
+if (guest) document.getElementById("guestName").value = guest;
+
+// envelope
+const intro = document.getElementById("intro");
+const seal = document.getElementById("seal");
+root.classList.add("locked");
+function openInvite() {
+  if (intro.classList.contains("is-opening")) return;
+  const finish = () => {
+    intro.classList.add("is-gone");
+    root.classList.remove("locked");
+    root.classList.add("ready-anim");
+    setTimeout(() => { intro.hidden = true; }, 800);
+    document.querySelector(".hero").setAttribute("tabindex", "-1");
+    document.querySelector(".hero").focus({ preventScroll: true });
+  };
+  if (reduceMotion) { finish(); return; }
+  intro.classList.add("is-opening");
+  setTimeout(finish, 2200);
+}
+seal.addEventListener("click", openInvite);
+setTimeout(() => seal.focus({ preventScroll: true }), 300);
+
+// reply
+const form = document.getElementById("replyForm");
+const countField = document.getElementById("countField");
+form.addEventListener("change", (e) => {
+  if (e.target.name === "attend") countField.hidden = e.target.value === "no";
+});
+// replies go to the bride's email through FormSubmit (the first message asks her to activate it once)
+const sendBtn = document.getElementById("sendBtn");
+const sendError = document.getElementById("sendError");
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const name = document.getElementById("guestName").value.trim();
+  const err = document.getElementById("nameError");
+  if (!name) {
+    err.hidden = false;
+    document.getElementById("guestName").focus();
+    return;
+  }
+  err.hidden = true;
+  sendError.hidden = true;
+  const yes = form.attend.value === "yes";
+  const count = Number(document.getElementById("guestCount").value);
+  const wish = document.getElementById("wish").value.trim();
+
+  sendBtn.disabled = true;
+  sendBtn.textContent = "جارٍ الإرسال…";
+  try {
+    const res = await fetch(`https://formsubmit.co/ajax/${WEDDING.email}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        _subject: `${yes ? "تأكيد حضور" : "اعتذار"} من ${name}`,
+        _template: "table",
+        _captcha: "false",
+        "الاسم": name,
+        "الحضور": yes ? "سيحضر" : "يعتذر",
+        "عدد الأفراد": yes ? count : 0,
+        "رسالة التهنئة": wish || "—"
+      })
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || String(data.success) !== "true") throw new Error(data.message || res.status);
+    document.getElementById("sentText").textContent = yes
+      ? `وصل ردّك يا ${name}، في انتظارك 🤍`
+      : `وصلت رسالتك يا ${name}، شكرًا على محبتك 🤍`;
+    document.getElementById("sent").hidden = false;
+    form.querySelectorAll("input, select, textarea").forEach((el) => { el.disabled = true; });
+    sendBtn.hidden = true;
+    document.getElementById("sent").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
+  } catch (ex) {
+    sendError.textContent = `لم يصل الرد بسبب مشكلة في الاتصال. حاول مرة أخرى، أو ابعت ردّك على ${WEDDING.email}`;
+    sendError.hidden = false;
+  } finally {
+    sendBtn.disabled = false;
+    sendBtn.textContent = "أرسل الرد";
+  }
+});
+</script>
+</body>
+</html>
