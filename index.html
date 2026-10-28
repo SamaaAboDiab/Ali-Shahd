@@ -1,14 +1,14 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Ali &amp; Shahd Wedding</title>
+<title>زفاف علي وشهد</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="You are invited to celebrate the wedding of Ali and Shahd">
+<meta name="description" content="أنتم مدعوون لحضور حفل زفاف علي وشهد">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Great+Vibes&family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Great+Vibes&family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Noto+Nastaliq+Urdu&display=swap">
 <style>
 /* Layout: a lace-and-pearl envelope fills the screen; opening it reveals a stack of full-height paper pages (names, save the date, details, evening, reply).
    Palette: ivory paper and white lace like the bride's dress, pearls, jewelry gold. The seal is a gold honeycomb brooch, because Shahd means honeycomb. */
@@ -24,9 +24,11 @@
   --line: rgba(184, 146, 74, .35);
   --on-gold: #FFFDF8;
 
-  --f-script: "Pinyon Script", "Snell Roundhand", "Apple Chancery", cursive;
-  --f-initials: "Great Vibes", "Pinyon Script", cursive;  /* fuller capitals for the A & S monogram */
-  --f-serif: "Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif;
+  /* Arabic: Amiri, a calligraphic naskh, sets the text: fine strokes that stay easy to read at every size.
+     The couple's names and initials are in nastaliq, the flowing Persian hand, to set them apart */
+  --f-script: "Amiri", serif;
+  --f-initials: "Noto Nastaliq Urdu", "Amiri", serif;
+  --f-serif: "Amiri", "Noto Naskh Arabic", "Traditional Arabic", serif;
 
   --s-1: 1.1rem; --s0: 1.28rem; --s1: 1.55rem; --s2: 2.1rem; --s3: 3rem;
   color-scheme: light;
@@ -100,16 +102,29 @@ body::before {
 .brooch:hover { transform: translate(-50%, -50%) scale(1.06); }
 .brooch:hover::after { border-color: var(--gold); }
 .brooch:focus-visible { border-radius: 50%; outline-offset: 8px; }
-/* the couple's initials either side of the gold leaf, inside a fixed gold ring */
+/* a fixed gold ring around the gold leaf */
 .brooch::before { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--gold); box-shadow: inset 0 0 0 4px rgba(255, 253, 248, .35), inset 0 0 0 5px rgba(184, 146, 74, .45); }
+/* the couple's initials stand outside the ring, the groom's on the left where reading starts and the bride's on the right,
+   each tilted a little, in gold foil, with an inked flourish and a pearl beneath, and are penned in once the envelope appears */
 .ini {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  font-family: var(--f-initials); font-size: clamp(2.7rem, 9.5vw, 3.3rem); line-height: 1;
-  color: var(--gold-deep); -webkit-text-stroke: .5px currentColor;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, .8), 0 -1px 1px rgba(90, 64, 24, .25);
+  position: absolute; top: 50%;
+  font-family: var(--f-initials); font-size: clamp(3.6rem, 14vw, 4.4rem); line-height: 1;
+  padding: .2em .15em .45em;
+  background: linear-gradient(160deg, #C9A45C 10%, #6F5220 55%, #A8843E 85%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  -webkit-text-stroke: .9px #7A5A22;  /* the script faces are hairline thin; the stroke gives the foil some body */
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, .8)) drop-shadow(0 2px 3px rgba(90, 64, 24, .25));
+  animation: pen-ltr 1.2s cubic-bezier(.45, .05, .35, 1) .6s both;
 }
-.ini-a { left: 8%; font-family: var(--f-script); }  /* A keeps the Pinyon form; only the S uses Great Vibes */
-.ini-s { right: 9%; }
+.ini::after {
+  content: ""; position: absolute; left: 50%; bottom: .22em;
+  width: 1.15em; height: .32em; transform: translateX(-50%);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 16'%3E%3Cpath d='M57 4 C44 12 26 13 12 9 C5 7 2 10 4 13 C6 15 10 13 8 11' fill='none' stroke='%23B8924A' stroke-width='1.3' stroke-linecap='round'/%3E%3Ccircle cx='57' cy='4' r='2.2' fill='%23F7F1E6' stroke='%23B8924A' stroke-width='.6'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.ini-a { right: 100%; margin-right: 12px; transform: translateY(-52%) rotate(2deg); font-family: var(--f-script); }  /* A keeps the Pinyon form; only the S uses Great Vibes */
+.ini-s { left: 100%; margin-left: 4px; transform: translateY(-46%) rotate(-7deg); animation-delay: 1.5s; }
+.ini-a::after { transform: translateX(-50%) scaleX(-1); }
+@keyframes pen-ltr { from { clip-path: inset(-50% 100% -50% -5%); } to { clip-path: inset(-50% -15% -50% -15%); } }
 .brooch svg { width: 100%; height: 100%; overflow: visible; }
 .brooch::after {
   content: ""; position: absolute; inset: -14px; border-radius: 50%;
@@ -199,16 +214,18 @@ h2.script { font-size: clamp(2.2rem, 10.5vw, 3.4rem); margin-bottom: 14px; text-
 
 /* opening page: one rhythm between verse, photo, families, names and date */
 .opening { padding-block: clamp(110px, 28vw, 124px) max(clamp(84px, 22vw, 110px), calc(var(--fade) + 20px)); }
-.opening .sheet { display: grid; justify-items: center; gap: clamp(18px, 5vw, 26px); padding-block: 0; }
-.opening .sheet > * { margin: 0; }
-.opening .families { gap: 0; }
-.opening .together { margin-top: -8px; }
+.opening .sheet, .names-page .sheet { display: grid; justify-items: center; gap: clamp(18px, 5vw, 26px); padding-block: 0; }
+.opening .sheet > *, .names-page .sheet > * { margin: 0; }
+.names-page .families { gap: 0; }
+.names-page .together { margin-top: -8px; }
 
 
 /* names */
 .names { display: grid; justify-items: center; margin: 6px 0; }
 .names .n { font-family: var(--f-script); font-size: clamp(4.6rem, 22vw, 7.5rem); color: var(--gold-deep); line-height: 1.05; font-weight: 400; }
-.names .amp { font-family: var(--f-serif); font-style: italic; font-weight: 600; font-size: clamp(1.7rem, 6vw, 2.3rem); color: var(--gold-deep); line-height: 1; margin-block: -.1em .1em; }
+/* "and" between the names is a calligraphic gold ampersand with mirrored flourishes */
+.names .amp-orn { display: block; width: clamp(220px, 70vw, 300px); height: auto; margin-block: -.05em .1em; overflow: visible; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .families { display: grid; justify-items: center; gap: 0; margin-bottom: 6px; }
 .families p { margin: 0; font-family: var(--f-script); font-size: clamp(1.9rem, 8vw, 2.4rem); color: var(--gold-deep); line-height: 1.25; }
 .families .amp-sm { font-style: italic; font-weight: 600; color: var(--gold-deep); font-size: 1.2rem; line-height: 1.2; }
@@ -316,15 +333,16 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
 .sent { border: 1px solid var(--gold); padding: 18px; text-align: center; background: var(--paper); }
 .sent p { margin: 0 0 12px; }
 
-/* couple photo, cut out and set in an arched window like the top of a framed portrait */
+/* couple photo, set in an arched window like the top of a framed portrait */
 .couple {
   position: relative;
   width: min(100%, 340px);
   margin: 0 auto;
+  padding: 8px 8px 0;
   display: grid; justify-items: center; align-items: end;
 }
 .couple::before {
-  content: ""; position: absolute; inset: 14% 4% 0;
+  content: ""; position: absolute; inset: 0;
   border-radius: 999px 999px 0 0;
   background: linear-gradient(175deg, #F3EADB, #E8DAC2);
   box-shadow: inset 0 0 0 1px var(--line), inset 0 0 0 6px var(--pearl), inset 0 0 0 7px var(--line);
@@ -332,22 +350,22 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
 .couple img {
   position: relative; z-index: 1;
   width: 100%; height: auto; max-width: 100%;
-  /* the cutout ends abruptly at his arm on the left and at the waist, so both edges fade */
-  -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 99%), linear-gradient(to right, transparent, #000 9%);
-  -webkit-mask-composite: source-in;
-          mask-image: linear-gradient(to bottom, #000 80%, transparent 99%), linear-gradient(to right, transparent, #000 9%);
-          mask-composite: intersect;
+  aspect-ratio: 3 / 4; object-fit: cover; object-position: center 40%;
+  border-radius: 999px 999px 0 0;
+  /* the photo is cropped at the waist, so the bottom edge fades into the card */
+  -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 99%);
+          mask-image: linear-gradient(to bottom, #000 80%, transparent 99%);
 }
 
 /* ornament rule and monogram */
 .orn { display: block; width: min(62%, 220px); height: auto; aspect-ratio: 10 / 1; margin: 2px auto 18px; overflow: visible; }
-.opening .orn { margin: 0 auto; }
+.names-page .orn { margin: 0 auto; }
 .monogram { display: block; width: clamp(150px, 46vw, 190px); height: auto; margin: 0 auto 22px; overflow: visible; }
 .monogram .ring { fill: none; stroke: var(--gold); stroke-width: .8; }
 .monogram .ring-in { fill: none; stroke: var(--line); stroke-width: .6; }
 .monogram text { font-family: var(--f-initials); fill: var(--gold-deep); stroke: var(--gold-deep); stroke-width: .5; }
 .monogram #monoA { font-family: var(--f-script); }
-.monogram .amp { font-family: var(--f-serif); font-style: italic; font-weight: 600; fill: var(--gold); stroke: none; }
+.monogram .amp { font-family: var(--f-initials); font-weight: 400; fill: var(--gold); stroke: none; }
 .dateline { margin: 18px 0 0; font-size: var(--s0); letter-spacing: .32em; color: var(--gold-deep); font-weight: 600; font-variant-numeric: lining-nums; }
 .closing .sheet { display: grid; justify-items: center; gap: 6px; }
 .closing .n { font-family: var(--f-script); font-size: clamp(2.8rem, 12vw, 3.6rem); color: var(--gold-deep); margin: 0; line-height: 1.2; }
@@ -363,6 +381,31 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
   box-shadow: 0 6px 16px rgba(110, 85, 50, .2);
 }
 .music svg { width: 20px; height: 20px; }
+
+/* rose petals that burst from the gold leaf when the envelope opens, then drift down over the first page */
+.petals { position: fixed; inset: 0; z-index: 55; pointer-events: none; overflow: hidden; }
+.petal {
+  position: absolute; left: 0; top: 0;
+  width: var(--w); height: calc(var(--w) * 1.15);
+  border-radius: 70% 70% 45% 45% / 85% 85% 30% 30%;
+  background: radial-gradient(ellipse at 50% 85%, var(--c2), var(--c1) 70%);
+  box-shadow: inset 0 -1px 2px rgba(160, 110, 80, .18), 0 1px 2px rgba(110, 85, 50, .15);
+  will-change: transform, opacity;
+}
+
+/* language switch: a pearl button in the top corner, above the envelope too, linking to the other language */
+.lang {
+  position: fixed; z-index: 60;
+  inset-inline-end: 16px;
+  top: calc(16px + env(safe-area-inset-top, 0px));
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1px solid var(--gold); background: var(--pearl); color: var(--gold-deep);
+  display: grid; place-items: center; text-decoration: none;
+  box-shadow: inset 0 0 0 3px var(--pearl), inset 0 0 0 4px var(--line), 0 6px 16px rgba(110, 85, 50, .2);
+  font: 700 1.55rem/1 "Amiri", serif; padding-bottom: 4px;
+  transition: background-color .2s ease;
+}
+.lang:hover { background: #F3EADB; }
 .music[aria-pressed="false"] .on, .music[aria-pressed="true"] .off { display: none; }
 
 @media (max-width: 380px) {
@@ -374,6 +417,68 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
   .cell b { font-size: 1.35rem; }
   .cell small { font-size: .8rem; }
 }
+/* ---------- Arabic ---------- */
+/* Arabic has no italics and letter spacing breaks the joins, so both are turned off; naskh needs taller lines */
+*, ::placeholder { font-style: normal !important; }
+.month, .dateline, .btn, .evening time { letter-spacing: 0; }
+body { line-height: 1.85; }
+/* the English script lines get a stroke to thicken a hairline face; Amiri needs none */
+.script, .families p, .intro-to, .venue, .closing .n, .done { -webkit-text-stroke: 0; }
+/* the initials outside the gold ring swap sides: the groom's on the right where Arabic reading starts, the bride's on the left,
+   in nastaliq, penned right to left; nastaliq reaches further up and down, so the box grows to keep the gold over all of it */
+.ini { font-family: var(--f-initials); font-size: clamp(3.7rem, 14.5vw, 4.6rem); font-weight: 400; padding: .35em .12em .55em; -webkit-text-stroke: 0; animation-name: pen; }
+.ini::after { bottom: -.02em; transform: translateX(-50%); }
+.ini-a { left: 100%; right: auto; margin: 0 0 0 4px; transform: translateY(-52%) rotate(-7deg); }
+.ini-s { right: 100%; left: auto; margin: 0 4px 0 0; transform: translateY(-46%) rotate(7deg); }
+.ini-s::after { transform: translateX(-50%) scaleX(-1); }
+.intro-to { font-size: 2rem; line-height: 1.6; }
+h2.script { line-height: 1.5; }
+.families p { font-size: clamp(1.7rem, 7vw, 2.1rem); line-height: 1.6; }
+.families .amp-sm { font-family: var(--f-script); font-size: 1.5rem; }
+.together, .request { line-height: 1.8; }
+/* the names: nastaliq with full vowel marks, gold foil with a soft engraved edge; the first layer is the glint that crosses the foil */
+.names .n {
+  font-family: var(--f-initials);
+  font-weight: 400; font-size: clamp(4rem, 19vw, 6.4rem); line-height: 1.3;
+  background:
+    linear-gradient(110deg, transparent 30%, rgba(255, 249, 228, .95) 50%, transparent 70%) -150% 0 / 60% 100% no-repeat,
+    linear-gradient(170deg, #9C7632 10%, #6F5220 45%, #A8843E 70%, #6F5220);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  -webkit-text-stroke: 0; filter: drop-shadow(0 1px 0 rgba(255, 255, 255, .7));
+  /* the gold is painted only inside the box, so the box reaches up and down to the vowel marks without moving the line */
+  padding-block: .4em .7em; margin-block: -.4em -.7em;  /* nastaliq tails reach well below the line */
+}
+/* the groom's name ends in a long nastaliq tail, so the ornament sits clear below it and closer above the bride's name */
+.names .amp-orn { margin-block: .85em -.1em; }
+.names-page .names { padding-top: 26px; }  /* room for the marks over the groom's name */
+/* a calligrapher's flourish under the bride's name, inked out to both sides from a pearl */
+.names .swash { display: block; width: clamp(200px, 60vw, 260px); height: auto; margin-top: -.15em; overflow: visible; }
+.names-page .names + .orn { display: none; }  /* the flourish already closes the names; a second rule under it would crowd them */
+.swash .ink { fill: none; stroke: url(#goldEdge); stroke-linecap: round; stroke-dasharray: 1; }
+.swash circle { transform-box: fill-box; transform-origin: center; }
+
+/* the artist's hand, the first time the names come into view: each name is written right to left like a pen stroke,
+   the ornament opens out between them, the flourish is inked under the bride's name, then a glint crosses the gold foil now and then */
+.js .names:not(.write) > :not(.sr-only) { opacity: 0; }
+.names.write .n { animation: pen 1.5s cubic-bezier(.45, .05, .35, 1) both, foil 8s ease-in-out infinite; }
+.names.write .n:first-of-type { animation-delay: .2s, 4.8s; }
+.names.write .n:last-of-type { animation-delay: 2s, 5.1s; }
+.names.write .amp-orn { animation: unfold 1s ease-out 1.5s both; }
+.names.write .swash .ink { animation: ink 1.4s ease-in-out 3.4s both; }
+.names.write .swash circle { animation: dot .5s ease-out 4.6s both; }
+@keyframes pen { from { clip-path: inset(-50% -5% -50% 100%); } to { clip-path: inset(-50% -15% -50% -15%); } }
+@keyframes unfold { from { opacity: 0; transform: scaleX(.15); } to { opacity: 1; transform: none; } }
+@keyframes ink { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes dot { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: none; } }
+@keyframes foil { from { background-position: -150% 0, 0 0; } 25%, to { background-position: 250% 0, 0 0; } }
+.cal .dow { font-size: .9rem; }
+.cell small { font-size: .95rem; }
+.venue { line-height: 1.6; }
+.closing .n { font-family: var(--f-initials); line-height: 2.1; padding-bottom: .15em; font-weight: 400; -webkit-text-stroke: 0; }
+.monogram text, .monogram #monoA { font-family: var(--f-initials); stroke: none; }
+.lang { font: italic 600 1.25rem/1 "Cormorant Garamond", serif; padding-bottom: 2px; }
+.music { right: auto; inset-inline-end: 16px; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
@@ -462,7 +567,7 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
 
 <div class="intro" id="intro">
   <div class="stage" id="stage">
-    <button class="brooch" id="brooch" type="button" aria-label="Open the invitation">
+    <button class="brooch" id="brooch" type="button" aria-label="افتح الدعوة">
       <span class="ini ini-a" id="iniA" aria-hidden="true">A</span>
       <span class="ini ini-s" id="iniS" aria-hidden="true">S</span>
       <svg viewBox="-50 -50 100 100" aria-hidden="true">
@@ -482,8 +587,8 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
       </svg>
     </button>
     <div class="intro-text">
-      <p class="intro-to" id="introTo">You are invited</p>
-      <p class="intro-hint">Tap the gold leaf to open</p>
+      <p class="intro-to" id="introTo">أنتم مدعوون</p>
+      <p class="intro-hint">اضغط على الورقة الذهبية لفتح الدعوة</p>
     </div>
   </div>
 </div>
@@ -491,8 +596,8 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
 
 
 <main>
-  <!-- names -->
-  <section class="page opening" aria-labelledby="names">
+  <!-- verse and photo -->
+  <section class="page opening" aria-label="الافتتاحية">
     <div class="sheet">
       <figure class="verse" lang="ar" dir="rtl">
         <blockquote>
@@ -503,18 +608,61 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
         <figcaption>سورة الروم، الآية ٢١</figcaption>
       </figure>
       <figure class="couple" id="couple" hidden>
-        <img id="couplePhoto" alt="" width="800" height="1000">
+        <img id="couplePhoto" alt="" width="960" height="1280">
       </figure>
+    </div>
+  </section>
+
+  <!-- names: a page of their own, so no page is taller than the lace frame drawn for it -->
+  <section class="page names-page" aria-labelledby="names">
+    <div class="sheet">
       <div class="families">
-        <p>The <span data-groom-family></span> Family</p>
-        <span class="amp-sm" aria-hidden="true">&amp;</span>
-        <p>The <span data-bride-family></span> Family</p>
+        <p>عائلة <span data-groom-family></span></p>
+        <span class="amp-sm" aria-hidden="true">و</span>
+        <p>عائلة <span data-bride-family></span></p>
       </div>
-      <p class="together">invite you to celebrate the marriage of their children</p>
+      <p class="together">يتشرفون بدعوتكم لمشاركتهم فرحة زفاف أبنائهم</p>
       <h1 class="names" id="names">
         <span class="n" data-groom>Ali</span>
-        <span class="amp">and</span>
+        <span class="sr-only">و</span>
+        <svg class="amp-orn" viewBox="0 0 240 64" aria-hidden="true">
+          <defs>
+            <!-- one side of the flourish; the other side is its mirror -->
+            <g id="ampWing">
+              <path d="M96 38 C84 50 66 46 58 36 C50 26 36 26 30 34 C25 41 30 49 37 47 C42 45.5 42 39 37.5 39" fill="none" stroke="url(#goldEdge)" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M94 26 C84 16 72 18 64 22 C56 26 46 22 46 15 C46 10 52 9 53.5 13" fill="none" stroke="url(#goldEdge)" stroke-width="1" stroke-linecap="round"/>
+              <path d="M58 36 C46 40 22 40 6 36" fill="none" stroke="#B8924A" stroke-width=".7" stroke-linecap="round" opacity=".7"/>
+              <use href="#leaf" fill="url(#goldG)" transform="translate(74 44.5) rotate(160) scale(.62)"/>
+              <use href="#leaf" fill="url(#goldG)" transform="translate(66 42) rotate(-140) scale(.5)"/>
+              <use href="#leaf" fill="url(#goldG)" transform="translate(72 19.5) rotate(200) scale(.5)"/>
+              <use href="#leaf" fill="url(#goldG)" transform="translate(64 22) rotate(130) scale(.42)"/>
+              <circle cx="84" cy="44" r="2.2" fill="url(#pearl)" stroke="#C9B27A" stroke-width=".4"/>
+              <circle cx="80" cy="18.6" r="1.6" fill="url(#pearl)" stroke="#C9B27A" stroke-width=".4"/>
+              <circle cx="6" cy="36" r="1.3" fill="url(#pearl)" stroke="#C9B27A" stroke-width=".4"/>
+            </g>
+          </defs>
+          <use href="#ampWing"/>
+          <use href="#ampWing" transform="translate(240 0) scale(-1 1)"/>
+          <!-- the و sits in a small gold ring, like the ring on the envelope -->
+          <circle cx="120" cy="34" r="19" fill="#F7F1E6" stroke="url(#goldEdge)" stroke-width="1"/>
+          <circle cx="120" cy="34" r="15.5" fill="none" stroke="#B8924A" stroke-width=".5" opacity=".6"/>
+          <text x="120" y="42" text-anchor="middle" font-size="30" font-weight="400" fill="url(#goldG)" stroke="#8A6A2E" stroke-width=".2" style="font-family: var(--f-initials)">و</text>
+        </svg>
         <span class="n" data-bride>Shahd</span>
+        <svg class="swash" viewBox="0 0 240 40" aria-hidden="true">
+          <!-- two mirrored halves, written out rather than <use>d so the ink styling and drawing animation reach both -->
+          <g>
+            <path class="ink" pathLength="1" stroke-width="1.5" d="M114 12 C96 24 70 26 46 20 C30 16 18 19 16 27 C14 34 22 37 26 32"/>
+            <path class="ink" pathLength="1" stroke-width=".6" d="M108 18 C90 27 72 29 56 27"/>
+            <circle cx="26" cy="32" r="1.6" fill="url(#pearl)" stroke="#B8924A" stroke-width=".4"/>
+          </g>
+          <g transform="translate(240 0) scale(-1 1)">
+            <path class="ink" pathLength="1" stroke-width="1.5" d="M114 12 C96 24 70 26 46 20 C30 16 18 19 16 27 C14 34 22 37 26 32"/>
+            <path class="ink" pathLength="1" stroke-width=".6" d="M108 18 C90 27 72 29 56 27"/>
+            <circle cx="26" cy="32" r="1.6" fill="url(#pearl)" stroke="#B8924A" stroke-width=".4"/>
+          </g>
+          <circle cx="120" cy="10" r="3.2" fill="url(#pearl)" stroke="#B8924A" stroke-width=".6"/>
+        </svg>
       </h1>
       <svg class="orn" viewBox="0 0 240 24" aria-hidden="true"><use href="#orn"/></svg>
       <p class="request" data-when-where></p>
@@ -524,7 +672,7 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
   <!-- save the date -->
   <section class="page" aria-labelledby="t-date">
     <div class="sheet">
-      <h2 class="script" id="t-date">Save the date</h2>
+      <h2 class="script" id="t-date">احفظوا الموعد</h2>
       <svg class="orn" viewBox="0 0 240 24" aria-hidden="true"><use href="#orn"/></svg>
       <p class="month" id="month"></p>
       <div class="cal" id="cal" aria-hidden="true"></div>
@@ -535,27 +683,27 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
   <!-- details -->
   <section class="page" aria-labelledby="t-details">
     <div class="sheet">
-      <h2 class="script" id="t-details">Counting the days</h2>
+      <h2 class="script" id="t-details">العدّ التنازلي</h2>
       <svg class="orn" viewBox="0 0 240 24" aria-hidden="true"><use href="#orn"/></svg>
       <div class="comb" id="comb">
-        <div class="cell"><b id="cd-d">0</b><small>days</small></div>
-        <div class="cell"><b id="cd-h">0</b><small>hours</small></div>
-        <div class="cell"><b id="cd-m">0</b><small>minutes</small></div>
-        <div class="cell"><b id="cd-s">0</b><small>seconds</small></div>
+        <div class="cell"><b id="cd-d">0</b><small>يوم</small></div>
+        <div class="cell"><b id="cd-h">0</b><small>ساعة</small></div>
+        <div class="cell"><b id="cd-m">0</b><small>دقيقة</small></div>
+        <div class="cell"><b id="cd-s">0</b><small>ثانية</small></div>
       </div>
-      <p class="done" id="done" hidden>We’re so happy you’re here</p>
-      <p class="small">The celebration will be held at</p>
+      <p class="done" id="done" hidden>سعداء بوجودكم معنا</p>
+      <p class="small">يُقام الحفل في</p>
       <p class="venue" data-venue></p>
       <p class="address" data-address></p>
       <div class="map" id="map" hidden></div>
       <div class="actions">
         <a class="btn btn-gold" id="mapLink" href="#" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
-          Get directions
+          اعرف الطريق
         </a>
         <a class="btn btn-line" id="calLink" href="#" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
-          Add to calendar
+          أضف إلى التقويم
         </a>
       </div>
     </div>
@@ -564,7 +712,7 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
   <!-- evening -->
   <section class="page" id="eveningSec" aria-labelledby="t-evening">
     <div class="sheet">
-      <h2 class="script" id="t-evening">The evening</h2>
+      <h2 class="script" id="t-evening">برنامج الحفل</h2>
       <svg class="orn" viewBox="0 0 240 24" aria-hidden="true"><use href="#orn"/></svg>
       <ol class="evening" id="evening"></ol>
     </div>
@@ -573,37 +721,37 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
   <!-- reply -->
   <section class="page" aria-labelledby="t-reply">
     <div class="sheet">
-      <h2 class="script" id="t-reply">Kindly reply</h2>
+      <h2 class="script" id="t-reply">نرجو تأكيد الحضور</h2>
       <svg class="orn" viewBox="0 0 240 24" aria-hidden="true"><use href="#orn"/></svg>
-      <p class="small">and leave a few words for the couple</p>
+      <p class="small">واتركوا كلمة للعروسين</p>
       <form class="form" id="form" novalidate>
         <div class="field">
-          <label for="guestName">Your name</label>
-          <input class="input" id="guestName" type="text" dir="auto" autocomplete="name" placeholder="e.g. Nour Hassan">
-          <p class="error" id="nameError" hidden>Enter your name so your reply reaches us with it.</p>
+          <label for="guestName">الاسم</label>
+          <input class="input" id="guestName" type="text" dir="auto" autocomplete="name" placeholder="مثال: نور حسن">
+          <p class="error" id="nameError" hidden>اكتب اسمك ليصلنا ردك باسمك.</p>
         </div>
         <fieldset class="field">
-          <legend>Will you attend?</legend>
+          <legend>هل ستحضر؟</legend>
           <div class="choices">
-            <label class="choice"><input type="radio" name="attend" id="attendYes" value="yes" checked><span>Joyfully accepts</span></label>
-            <label class="choice"><input type="radio" name="attend" id="attendNo" value="no"><span>Regretfully declines</span></label>
+            <label class="choice"><input type="radio" name="attend" id="attendYes" value="yes" checked><span>سأحضر بكل سرور</span></label>
+            <label class="choice"><input type="radio" name="attend" id="attendNo" value="no"><span>أعتذر عن الحضور</span></label>
           </div>
         </fieldset>
         <div class="field" id="countField">
-          <label for="guestCount">Number of guests</label>
+          <label for="guestCount">عدد الحضور</label>
           <select class="select" id="guestCount">
-            <option value="1">1 guest</option>
-            <option value="2">2 guests</option>
-            <option value="3">3 guests</option>
-            <option value="4">4 guests</option>
-            <option value="5">5 guests</option>
+            <option value="1">شخص واحد</option>
+            <option value="2">شخصان</option>
+            <option value="3">٣ أشخاص</option>
+            <option value="4">٤ أشخاص</option>
+            <option value="5">٥ أشخاص</option>
           </select>
         </div>
         <div class="field">
-          <label for="wish">A note for the couple <span class="small">(optional)</span></label>
-          <textarea class="area" id="wish" dir="auto" placeholder="Your wishes for Ali and Shahd"></textarea>
+          <label for="wish">رسالة للعروسين <span class="small">(اختياري)</span></label>
+          <textarea class="area" id="wish" dir="auto" placeholder="تمنياتك لعلي وشهد"></textarea>
         </div>
-        <button class="btn btn-gold" id="sendBtn" type="submit">Send my reply</button>
+        <button class="btn btn-gold" id="sendBtn" type="submit">أرسل ردّي</button>
         <p class="error" id="sendError" role="alert" hidden></p>
         <div class="sent" id="sent" role="status" hidden>
           <p id="sentText"></p>
@@ -613,25 +761,27 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
   </section>
 
   <!-- closing -->
-  <section class="page closing" aria-label="Closing">
+  <section class="page closing" aria-label="الختام">
     <div class="sheet">
       <svg class="monogram" viewBox="-80 -80 160 160" aria-hidden="true">
         <circle class="ring" r="66"/>
         <circle class="ring-in" r="58"/>
         <g id="monoPearls"></g>
-        <text id="monoA" x="-14" y="10" font-size="62" text-anchor="middle">A</text>
-        <text class="amp" x="2" y="22" font-size="18" text-anchor="middle">&amp;</text>
-        <text id="monoS" x="20" y="34" font-size="62" text-anchor="middle">S</text>
+        <text id="monoA" x="32" y="12" font-size="46" font-weight="400" text-anchor="middle">ع</text>
+        <text class="amp" x="0" y="10" font-size="28" text-anchor="middle">و</text>
+        <text id="monoS" x="-30" y="12" font-size="46" font-weight="400" text-anchor="middle">ش</text>
       </svg>
-      <p class="small">With love and gratitude,</p>
-      <p class="n"><span data-groom>Ali</span> &amp; <span data-bride>Shahd</span></p>
-      <p class="small">We can’t wait to celebrate with you</p>
+      <p class="small">مع خالص الحب والامتنان،</p>
+      <p class="n"><span data-groom>عَلِيّ</span> و <span data-bride>شَهْد</span></p>
+      <p class="small">ننتظركم لنحتفل معًا</p>
       <p class="dateline" id="dateline"></p>
     </div>
   </section>
 </main>
 
-<button class="music" id="music" type="button" aria-pressed="false" aria-label="Play music" hidden>
+<a class="lang" id="lang" href="en.html" hreflang="en" lang="en" aria-label="English version">En</a>
+
+<button class="music" id="music" type="button" aria-pressed="false" aria-label="تشغيل الموسيقى" hidden>
   <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/><path d="M2 2l20 20"/></svg>
   <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
 </button>
@@ -641,14 +791,15 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
    Edit the wedding details here
    ========================================================= */
 const WEDDING = {
-  bride: "Shahd",
-  groom: "Ali",
-  brideFamily: "Haggag",
-  groomFamily: "El Giziry",
+  // names are written with full vowel marks (tashkeel)
+  bride: "شَهْد",
+  groom: "عَلِيّ",
+  brideFamily: "حجاج",
+  groomFamily: "الجزيري",
   // wedding day and time, Cairo time (7 PM)
   date: "2026-11-15T19:00:00+02:00",
   durationHours: 5,
-  venue: "Mass Hall",
+  venue: "قاعة ماس",
   address: "",
   // Google Maps link to the hall; leave "" to hide the directions button
   mapUrl: "",
@@ -657,7 +808,7 @@ const WEDDING = {
   // replies and wishes arrive at this email
   email: "sh223524@gmail.com",
   // couple photo with the background removed, placed next to this page; leave "" to hide it
-  photo: "couple.webp",
+  photo: "couple.jpg",
   // song file placed next to this page (e.g. "song.mp3"); leave "" for no music
   song: "song.mp3",
   // evening program; leave [] to hide the page. Example: { time: "19:00", title: "Guests arrive" }
@@ -670,7 +821,7 @@ root.classList.add("js");
 const TZ = "Africa/Cairo";
 const when = new Date(WEDDING.date);
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const fmt = (opts, d = when) => new Intl.DateTimeFormat("en-GB", { timeZone: TZ, ...opts }).format(d);
+const fmt = (opts, d = when) => new Intl.DateTimeFormat("ar-EG", { timeZone: TZ, ...opts }).format(d);
 const setAll = (sel, text) => document.querySelectorAll(sel).forEach((el) => { el.textContent = text; });
 
 setAll("[data-bride]", WEDDING.bride);
@@ -679,11 +830,20 @@ setAll("[data-venue]", WEDDING.venue);
 setAll("[data-address]", WEDDING.address);
 setAll("[data-bride-family]", WEDDING.brideFamily);
 setAll("[data-groom-family]", WEDDING.groomFamily);
+// nastaliq draws a ه inside a word as a small hook; in the names it is shown as the two-eyed ھ, the shape Arabic readers know
+document.querySelectorAll(".names .n, .closing .n span").forEach((el) => { el.textContent = el.textContent.replace(/ه/g, "ھ"); });
+// the names are written in by hand the first time their page comes into view
+const namesEl = document.getElementById("names");
+if (reduceMotion || !("IntersectionObserver" in window)) namesEl.classList.add("write");
+else new IntersectionObserver((entries, io) => {
+  if (entries[0].isIntersecting) { namesEl.classList.add("write"); io.disconnect(); }
+}, { threshold: .45 }).observe(namesEl);
 setAll("[data-when-where]", `${fmt({ weekday: "long", day: "numeric", month: "long", year: "numeric" })}
-at ${WEDDING.venue}`);
+في ${WEDDING.venue}`);
 document.querySelector("[data-address]").hidden = !WEDDING.address;
 
 // monogram: the couple's initials inside a ring of pearls, and a printed-card date line
+// the first letter of each name, without its vowel mark
 document.getElementById("monoA").textContent = WEDDING.groom[0];
 document.getElementById("iniA").textContent = WEDDING.groom[0];
 document.getElementById("iniS").textContent = WEDDING.bride[0];
@@ -701,27 +861,28 @@ for (let i = 0; i < 36; i++) {
   pearls.appendChild(c);
 }
 document.getElementById("dateline").textContent =
-  `${fmt({ day: "2-digit" })}.${fmt({ month: "2-digit" })}.${fmt({ year: "numeric" })}`;
+  fmt({ day: "numeric", month: "long", year: "numeric" });
 document.getElementById("eveningSec").hidden = WEDDING.evening.length === 0;
 if (WEDDING.photo) {
   const img = document.getElementById("couplePhoto");
-  img.alt = `${WEDDING.groom} and ${WEDDING.bride}`;
+  img.alt = `${WEDDING.groom} و${WEDDING.bride}`;
   img.onload = () => {
     document.getElementById("couple").hidden = false;
 
   };
   img.src = WEDDING.photo;
 }
-document.title = `${WEDDING.groom} & ${WEDDING.bride} Wedding`;
-document.getElementById("wish").placeholder = `Your wishes for ${WEDDING.groom} and ${WEDDING.bride}`;
+document.title = "زفاف علي وشهد";
 
-// calendar for the wedding month, weeks starting Sunday
-const y = Number(fmt({ year: "numeric" }));
-const mo = Number(fmt({ month: "numeric" })) - 1;
-const dd = Number(fmt({ day: "numeric" }));
+// calendar for the wedding month, weeks starting Sunday; numbers are read in Western digits, shown in Arabic ones
+const num = (opts) => Number(new Intl.DateTimeFormat("en-GB", { timeZone: TZ, ...opts }).format(when));
+const ar = (n) => n.toLocaleString("ar-EG");
+const y = num({ year: "numeric" });
+const mo = num({ month: "numeric" }) - 1;
+const dd = num({ day: "numeric" });
 document.getElementById("month").textContent = fmt({ month: "long", year: "numeric" });
 const cal = document.getElementById("cal");
-["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].forEach((d) => {
+["أحد", "إثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت"].forEach((d) => {
   const s = document.createElement("span"); s.className = "dow"; s.textContent = d; cal.appendChild(s);
 });
 const firstDow = new Date(Date.UTC(y, mo, 1)).getUTCDay();
@@ -729,23 +890,23 @@ const daysIn = new Date(Date.UTC(y, mo + 1, 0)).getUTCDate();
 for (let i = 0; i < firstDow; i++) cal.appendChild(document.createElement("span"));
 for (let d = 1; d <= daysIn; d++) {
   const s = document.createElement("span");
-  s.textContent = d;
+  s.textContent = ar(d);
   if (d === dd) s.className = "day-on";
   cal.appendChild(s);
 }
 
 // date written out, the way a printed invitation reads
-const ORD = ["", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth",
-  "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth",
-  "twentieth", "twenty-first", "twenty-second", "twenty-third", "twenty-fourth", "twenty-fifth", "twenty-sixth",
-  "twenty-seventh", "twenty-eighth", "twenty-ninth", "thirtieth", "thirty-first"];
-const HOURS = ["twelve", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven"];
-const hh = Number(fmt({ hour: "numeric", hourCycle: "h23" }));
-const mm = Number(fmt({ minute: "numeric" }));
-const part = hh < 12 ? "in the morning" : hh < 17 ? "in the afternoon" : "in the evening";
-const timeWords = mm === 0 ? `${HOURS[hh % 12]} o’clock` : `${HOURS[hh % 12]} ${mm === 30 ? "thirty" : String(mm).padStart(2, "0")}`;
+const ORD = ["", "الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس", "السابع", "الثامن", "التاسع", "العاشر",
+  "الحادي عشر", "الثاني عشر", "الثالث عشر", "الرابع عشر", "الخامس عشر", "السادس عشر", "السابع عشر", "الثامن عشر", "التاسع عشر",
+  "العشرون", "الحادي والعشرون", "الثاني والعشرون", "الثالث والعشرون", "الرابع والعشرون", "الخامس والعشرون", "السادس والعشرون",
+  "السابع والعشرون", "الثامن والعشرون", "التاسع والعشرون", "الثلاثون", "الحادي والثلاثون"];
+const HOURS = ["الثانية عشرة", "الواحدة", "الثانية", "الثالثة", "الرابعة", "الخامسة", "السادسة", "السابعة", "الثامنة", "التاسعة", "العاشرة", "الحادية عشرة"];
+const hh = num({ hour: "numeric", hourCycle: "h23" });
+const mm = num({ minute: "numeric" });
+const part = hh < 12 ? "صباحًا" : hh < 17 ? "ظهرًا" : "مساءً";
+const timeWords = mm === 0 ? `${HOURS[hh % 12]}` : `${HOURS[hh % 12]} و${mm === 30 ? "النصف" : ar(mm) + " دقيقة"}`;
 document.getElementById("spelled").textContent =
-  `${fmt({ weekday: "long" })}, the ${ORD[dd]} of ${fmt({ month: "long" })}, at ${timeWords} ${part}`;
+  `يوم ${fmt({ weekday: "long" })}، ${ORD[dd]} من ${fmt({ month: "long" })}، في تمام الساعة ${timeWords} ${part}`;
 
 // evening
 const evening = document.getElementById("evening");
@@ -753,7 +914,7 @@ WEDDING.evening.forEach((p) => {
   const [h, m] = p.time.split(":").map(Number);
   const li = document.createElement("li");
   li.innerHTML = "<time></time><strong></strong>";
-  li.querySelector("time").textContent = new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit" }).format(new Date(2000, 0, 1, h, m));
+  li.querySelector("time").textContent = new Intl.DateTimeFormat("ar-EG", { hour: "numeric", minute: "2-digit" }).format(new Date(2000, 0, 1, h, m));
   li.querySelector("strong").textContent = p.title;
   evening.appendChild(li);
 });
@@ -765,13 +926,13 @@ const stamp = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "")
 const end = new Date(when.getTime() + WEDDING.durationHours * 3600e3);
 document.getElementById("calLink").href =
   "https://calendar.google.com/calendar/render?action=TEMPLATE" +
-  "&text=" + encodeURIComponent(`${WEDDING.groom} & ${WEDDING.bride} Wedding`) +
+  "&text=" + encodeURIComponent("زفاف علي وشهد") +
   "&dates=" + stamp(when) + "/" + stamp(end) +
   "&location=" + encodeURIComponent(`${WEDDING.venue}, ${WEDDING.address}`);
 if (WEDDING.mapEmbed) {
   const box = document.getElementById("map");
   const f = document.createElement("iframe");
-  f.src = WEDDING.mapEmbed; f.loading = "lazy"; f.title = `Map to ${WEDDING.venue}`;
+  f.src = WEDDING.mapEmbed; f.loading = "lazy"; f.title = `خريطة ${WEDDING.venue}`;
   f.referrerPolicy = "no-referrer-when-downgrade";
   box.appendChild(f); box.hidden = false;
 }
@@ -782,7 +943,7 @@ function tick() {
   let diff = Math.max(0, when - Date.now());
   if (diff === 0) {
     // the countdown runs until the wedding starts, then the page greets the guests
-    document.getElementById("t-details").textContent = "Welcome to our wedding";
+    document.getElementById("t-details").textContent = "أهلًا بكم في حفل زفافنا";
     document.getElementById("comb").hidden = true;
     document.getElementById("done").hidden = false;
     return;
@@ -791,16 +952,17 @@ function tick() {
   const h = Math.floor(diff / 36e5);  diff -= h * 36e5;
   const m = Math.floor(diff / 6e4);   diff -= m * 6e4;
   const s = Math.floor(diff / 1e3);
-  [d, h, m, s].forEach((v, i) => { cd[i].textContent = v; });
+  [d, h, m, s].forEach((v, i) => { cd[i].textContent = v.toLocaleString("ar-EG"); });
   setTimeout(tick, 1000 - (Date.now() % 1000));
 }
 tick();
 
-// personal greeting: index.html?guest=Nour
+// personal greeting: ?guest=نور
 let guest = "";
 try { guest = (new URLSearchParams(location.search).get("guest") || "").trim().slice(0, 40); } catch (e) {}
+document.getElementById("lang").href += location.search;  // the other language keeps the guest's name
 if (guest) {
-  document.getElementById("introTo").textContent = `Dear ${guest}`;
+  document.getElementById("introTo").textContent = `إلى ${guest}`;
   document.getElementById("guestName").value = guest;
 }
 
@@ -814,8 +976,8 @@ if (WEDDING.song) {
   music.addEventListener("click", () => {
     if (audio.paused) audio.play().catch(() => {}); else audio.pause();
   });
-  audio.addEventListener("play", () => { music.setAttribute("aria-pressed", "true"); music.setAttribute("aria-label", "Pause music"); });
-  audio.addEventListener("pause", () => { music.setAttribute("aria-pressed", "false"); music.setAttribute("aria-label", "Play music"); });
+  audio.addEventListener("play", () => { music.setAttribute("aria-pressed", "true"); music.setAttribute("aria-label", "إيقاف الموسيقى"); });
+  audio.addEventListener("pause", () => { music.setAttribute("aria-pressed", "false"); music.setAttribute("aria-label", "تشغيل الموسيقى"); });
 }
 
 // envelope
@@ -833,7 +995,48 @@ function openInvite() {
   };
   if (reduceMotion) { finish(); return; }
   intro.classList.add("is-opening");
-  setTimeout(finish, 2100);
+  scatterPetals();
+  // the envelope fades while the petals are still in the air, so the page shows through them with no empty pause
+  setTimeout(finish, 900);
+}
+
+// ivory, blush and champagne petals: most burst out of the leaf, the rest fall from the top a moment later
+const PETAL_COLORS = [["#FFFDF8", "#F1E2CF"], ["#FBEFEA", "#EBC9C0"], ["#F8EEDD", "#E2C99A"], ["#FFF8F2", "#F0D3CB"]];
+function scatterPetals() {
+  const layer = document.createElement("div");
+  layer.className = "petals";
+  layer.setAttribute("aria-hidden", "true");
+  document.body.appendChild(layer);
+  const W = innerWidth, H = innerHeight;
+  const rect = brooch.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  let longest = 0;
+  for (let i = 0; i < 60; i++) {
+    const p = document.createElement("i");
+    const [c1, c2] = PETAL_COLORS[i % PETAL_COLORS.length];
+    p.className = "petal";
+    p.style.setProperty("--w", rnd(13, 24).toFixed(1) + "px");
+    p.style.setProperty("--c1", c1);
+    p.style.setProperty("--c2", c2);
+    layer.appendChild(p);
+    const burst = i < 38;
+    const x0 = burst ? cx : rnd(-20, W + 20), y0 = burst ? cy : rnd(-60, -20);
+    const a = rnd(0, Math.PI * 2), r = rnd(80, Math.max(W, 360) * .6);
+    const x1 = burst ? cx + Math.cos(a) * r : x0 + rnd(-40, 40);
+    const y1 = burst ? cy + Math.sin(a) * r * .7 : rnd(H * .1, H * .35);
+    const x2 = x1 + rnd(-90, 90), y2 = H + 40;
+    const r0 = rnd(0, 360), spin = rnd(240, 620) * (Math.random() < .5 ? -1 : 1);
+    const duration = rnd(3200, 5200), delay = burst ? rnd(0, 250) : rnd(500, 1600);
+    longest = Math.max(longest, duration + delay);
+    p.animate([
+      { transform: `translate(${x0}px, ${y0}px) rotate(${r0}deg) scale(.3)`, opacity: 0 },
+      { transform: `translate(${x1}px, ${y1}px) rotate(${r0 + spin * .3}deg) rotateX(160deg) scale(1)`, opacity: 1, offset: .22 },
+      { transform: `translate(${(x1 + x2) / 2 + rnd(-40, 40)}px, ${(y1 + y2) / 2}px) rotate(${r0 + spin * .65}deg) rotateX(380deg) scale(1)`, opacity: 1, offset: .62 },
+      { transform: `translate(${x2}px, ${y2}px) rotate(${r0 + spin}deg) rotateX(600deg) scale(.9)`, opacity: .85 }
+    ], { duration, delay, easing: "cubic-bezier(.2,.6,.4,1)", fill: "both" });
+  }
+  setTimeout(() => layer.remove(), longest + 200);
 }
 brooch.addEventListener("click", openInvite);
 setTimeout(() => brooch.focus({ preventScroll: true }), 300);
@@ -857,13 +1060,13 @@ form.addEventListener("submit", async (e) => {
   const wish = document.getElementById("wish").value.trim();
 
   sendBtn.disabled = true;
-  sendBtn.textContent = "Sending…";
+  sendBtn.textContent = "جارٍ الإرسال…";
   try {
     const res = await fetch(`https://formsubmit.co/ajax/${WEDDING.email}`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({
-        _subject: `${yes ? "RSVP: attending" : "RSVP: declines"} from ${name}`,
+        _subject: `${yes ? "تأكيد حضور" : "اعتذار عن الحضور"} من ${name}`,
         _template: "table",
         _captcha: "false",
         Name: name,
@@ -875,18 +1078,18 @@ form.addEventListener("submit", async (e) => {
     const data = await res.json().catch(() => ({}));
     if (!res.ok || String(data.success) !== "true") throw new Error(data.message || res.status);
     document.getElementById("sentText").textContent = yes
-      ? `Thank you, ${name}. Your reply reached us and we can’t wait to see you.`
-      : `Thank you, ${name}. Your note reached us, and we’ll miss you.`;
+      ? `شكرًا يا ${name}، وصلنا ردك ونتطلع لرؤيتك.`
+      : `شكرًا يا ${name}، وصلتنا رسالتك وسنفتقدك.`;
     document.getElementById("sent").hidden = false;
     form.querySelectorAll("input, select, textarea").forEach((el) => { el.disabled = true; });
     sendBtn.hidden = true;
     document.getElementById("sent").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
   } catch (ex) {
-    sendError.textContent = `Your reply didn’t go through because of a connection problem. Try again, or email it to ${WEDDING.email}.`;
+    sendError.textContent = `لم يُرسَل ردك بسبب مشكلة في الاتصال. حاول مرة أخرى، أو أرسله إلى ${WEDDING.email}`;
     sendError.hidden = false;
   } finally {
     sendBtn.disabled = false;
-    sendBtn.textContent = "Send my reply";
+    sendBtn.textContent = "أرسل ردّي";
   }
 });
 </script>
