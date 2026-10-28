@@ -6,6 +6,14 @@
 <title>Ali &amp; Shahd Wedding</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="You are invited to celebrate the wedding of Ali and Shahd">
+<meta name="theme-color" content="#EFE6D5">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<!-- the envelope shows first and the lace and photo right after it; the CSS and script find them late, so fetch them now -->
+<link rel="preload" href="assets/envelope.jpg" as="image" fetchpriority="high">
+<link rel="preload" href="assets/lace.jpg" as="image">
+<link rel="preload" href="couple.jpg" as="image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Great+Vibes&family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap">
@@ -112,7 +120,7 @@ body::before {
   -webkit-background-clip: text; background-clip: text; color: transparent;
   -webkit-text-stroke: .9px #7A5A22;  /* the script faces are hairline thin; the stroke gives the foil some body */
   filter: drop-shadow(0 1px 0 rgba(255, 255, 255, .8)) drop-shadow(0 2px 3px rgba(90, 64, 24, .25));
-  animation: pen-ltr 1.2s cubic-bezier(.45, .05, .35, 1) .6s both;
+  animation: pen-ltr .8s cubic-bezier(.45, .05, .35, 1) .3s both;
 }
 .ini::after {
   content: ""; position: absolute; left: 50%; bottom: .22em;
@@ -120,7 +128,7 @@ body::before {
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 16'%3E%3Cpath d='M57 4 C44 12 26 13 12 9 C5 7 2 10 4 13 C6 15 10 13 8 11' fill='none' stroke='%23B8924A' stroke-width='1.3' stroke-linecap='round'/%3E%3Ccircle cx='57' cy='4' r='2.2' fill='%23F7F1E6' stroke='%23B8924A' stroke-width='.6'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 .ini-a { right: 100%; margin-right: 12px; transform: translateY(-52%) rotate(2deg); font-family: var(--f-script); }  /* A keeps the Pinyon form; only the S uses Great Vibes */
-.ini-s { left: 100%; margin-left: 4px; transform: translateY(-46%) rotate(-7deg); animation-delay: 1.5s; }
+.ini-s { left: 100%; margin-left: 4px; transform: translateY(-46%) rotate(-7deg); animation-delay: .9s; }
 .ini-a::after { transform: translateX(-50%) scaleX(-1); }
 @keyframes pen-ltr { from { clip-path: inset(-50% 100% -50% -5%); } to { clip-path: inset(-50% -15% -50% -15%); } }
 .brooch svg { width: 100%; height: 100%; overflow: visible; }
@@ -229,8 +237,8 @@ h2.script { font-size: clamp(2.2rem, 10.5vw, 3.4rem); margin-bottom: 14px; text-
 .families .amp-sm { font-style: italic; font-weight: 600; color: var(--gold-deep); font-size: 1.2rem; line-height: 1.2; }
 .together { font-size: var(--s0); font-style: italic; margin: 4px auto 0; max-width: 22rem; color: var(--muted); text-wrap: balance; }
 .request { white-space: pre-line; margin: 0 auto; max-width: 22rem; font-size: var(--s1); line-height: 1.5; text-wrap: balance; }
-.js.ready-anim .couple { animation: rise 1.4s ease both; }
-.js.ready-anim .names { animation: rise 1.6s ease .4s both; }
+.js.ready-anim .couple { animation: rise .9s ease both; }
+.js.ready-anim .names { animation: rise 1s ease .2s both; }
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
 /* calendar */
@@ -905,7 +913,7 @@ function openInvite() {
   intro.classList.add("is-opening");
   scatterPetals();
   // the envelope fades while the petals are still in the air, so the page shows through them with no empty pause
-  setTimeout(finish, 900);
+  setTimeout(finish, 700);
 }
 
 // ivory, blush and champagne petals: most burst out of the leaf, the rest fall from the top a moment later

@@ -64,12 +64,12 @@ h2.script { line-height: 1.5; }
 /* the artist's hand, the first time the names come into view: each name is written right to left like a pen stroke,
    the ornament opens out between them, the flourish is inked under the bride's name, then a glint crosses the gold foil now and then */
 .js .names:not(.write) > :not(.sr-only) { opacity: 0; }
-.names.write .n { animation: pen 1.5s cubic-bezier(.45, .05, .35, 1) both, foil 8s ease-in-out infinite; }
-.names.write .n:first-of-type { animation-delay: .2s, 4.8s; }
-.names.write .n:last-of-type { animation-delay: 2s, 5.1s; }
-.names.write .amp-orn { animation: unfold 1s ease-out 1.5s both; }
-.names.write .swash .ink { animation: ink 1.4s ease-in-out 3.4s both; }
-.names.write .swash circle { animation: dot .5s ease-out 4.6s both; }
+.names.write .n { animation: pen 1s cubic-bezier(.45, .05, .35, 1) both, foil 8s ease-in-out infinite; }
+.names.write .n:first-of-type { animation-delay: .1s, 3.2s; }
+.names.write .n:last-of-type { animation-delay: 1.2s, 3.5s; }
+.names.write .amp-orn { animation: unfold .7s ease-out .9s both; }
+.names.write .swash .ink { animation: ink .9s ease-in-out 2.1s both; }
+.names.write .swash circle { animation: dot .4s ease-out 2.9s both; }
 @keyframes pen { from { clip-path: inset(-50% -5% -50% 100%); } to { clip-path: inset(-50% -15% -50% -15%); } }
 @keyframes unfold { from { opacity: 0; transform: scaleX(.15); } to { opacity: 1; transform: none; } }
 @keyframes ink { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
